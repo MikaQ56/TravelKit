@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Vos euros valent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siA-iO-M0A">
-                                <rect key="frame" x="0.0" y="497.5" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="509" width="375" height="50"/>
                                 <color key="backgroundColor" red="0.50980392156862742" green="0.67843137254901964" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="siA-iO-M0A" secondAttribute="height" multiplier="15:2" id="RwO-bm-Oqt"/>
@@ -58,14 +58,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                 <connections>
-                                    <outlet property="delegate" destination="tch-rv-HGn" id="VmA-Lp-bNO"/>
+                                    <outlet property="delegate" destination="tch-rv-HGn" id="Mge-eY-qgv"/>
                                 </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ps-Tn-KRz">
-                                <rect key="frame" x="0.0" y="275" width="375" height="217.5"/>
+                                <rect key="frame" x="0.0" y="275" width="375" height="229"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-BS-NXQ">
-                                <rect key="frame" x="0.0" y="573" width="375" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-BS-NXQ">
+                                <rect key="frame" x="0.0" y="584" width="375" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mWa-BS-NXQ" secondAttribute="height" multiplier="375:32" id="wfk-zj-njW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -78,7 +81,7 @@
                             <constraint firstItem="u3Q-Ua-jSY" firstAttribute="leading" secondItem="TSa-zh-lfB" secondAttribute="leading" id="Da8-M5-X1a"/>
                             <constraint firstItem="u3Q-Ua-jSY" firstAttribute="trailing" secondItem="TSa-zh-lfB" secondAttribute="trailing" id="EAS-O6-hhK"/>
                             <constraint firstItem="siA-iO-M0A" firstAttribute="trailing" secondItem="TSa-zh-lfB" secondAttribute="trailing" id="LEQ-9H-XX0"/>
-                            <constraint firstItem="TSa-zh-lfB" firstAttribute="bottom" secondItem="mWa-BS-NXQ" secondAttribute="bottom" constant="25" id="MkL-Bg-do1"/>
+                            <constraint firstItem="TSa-zh-lfB" firstAttribute="bottom" secondItem="mWa-BS-NXQ" secondAttribute="bottom" constant="2" id="MkL-Bg-do1"/>
                             <constraint firstItem="Uml-Mu-I7G" firstAttribute="trailing" secondItem="TSa-zh-lfB" secondAttribute="trailing" id="SDo-Pk-BOU"/>
                             <constraint firstItem="0ps-Tn-KRz" firstAttribute="trailing" secondItem="TSa-zh-lfB" secondAttribute="trailing" id="SiN-f3-BqL"/>
                             <constraint firstItem="0ps-Tn-KRz" firstAttribute="top" secondItem="u3Q-Ua-jSY" secondAttribute="bottom" constant="5" id="VDo-Ll-H9r"/>
@@ -98,8 +101,7 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="amount" destination="UfS-an-wj7" id="eac-qi-qUM"/>
-                        <outlet property="result" destination="mWa-BS-NXQ" id="ekF-ek-tvc"/>
+                        <outlet property="resultLabel" destination="mWa-BS-NXQ" id="Jc9-QY-lgo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g5z-UQ-qIv" userLabel="First Responder" sceneMemberID="firstResponder"/>

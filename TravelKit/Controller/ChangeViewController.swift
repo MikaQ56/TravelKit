@@ -8,12 +8,30 @@
 
 import UIKit
 
+// MARK: - Outlets & properties
 class ChangeViewController: UIViewController {
 
     private let converter = Converter()
     
-    @IBOutlet weak var result: UILabel!
-    @IBOutlet weak var amount: UITextField!
+    private let changeService = ChangeService.shared
+    
+    @IBOutlet weak var resultLabel: UILabel!
+    
+    
+}
+
+// MARK: - Controller's life cycle
+extension ChangeViewController {
+    
+    override func viewDidLoad() {
+        changeService.getCurrencies { (success, currencies) in
+            guard success, let currencies = currencies else {
+                return
+            }
+            self.converter.set(currencies: currencies)
+        }
+    }
+    
 }
 
 // MARK: - Keyboard
@@ -21,14 +39,22 @@ extension ChangeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        ChangeService.shared.getChangeRate { (success, changeRate) in
-            guard success, let changeRate = changeRate else {
-                return
-            }
-            let result = self.converter.convert(changeRate: changeRate, amount: self.amount.text)
-            self.result.text = String(result)
-        }
+        updateRates()
+        let amount = textField.text
+        converter.set(amount: amount)
         return true
     }
+}
 
+// MARK: - Utilities
+extension ChangeViewController {
+    
+    private func updateRates() {
+        changeService.getRates { (success, rates) in
+            guard success, let rates = rates else {
+                return
+            }
+            self.converter.set(rates: rates)
+        }
+    }
 }

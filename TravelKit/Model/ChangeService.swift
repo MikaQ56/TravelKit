@@ -14,15 +14,46 @@ class ChangeService {
     
     private init(){}
     
-    private let changeUrl = URL(string: "http://data.fixer.io/api/latest?access_key=69389a470e7df4f67b5e02e082b4e4bf")
+    private let ratesUrl = URL(string: "http://data.fixer.io/api/latest?access_key=69389a470e7df4f67b5e02e082b4e4bf")
+    
+    private let currenciesUrl = URL(string: "http://data.fixer.io/api/symbols?access_key=69389a470e7df4f67b5e02e082b4e4bf")
     
     private let session = URLSession(configuration: .default)
     
     private var task: URLSessionDataTask?
     
-    func getChangeRate(callback: @escaping (Bool, ChangeRate?) -> Void) {
+    func getRates(callback: @escaping (Bool, RatesList?) -> Void) {
         task?.cancel()
-        task = session.dataTask(with: changeUrl!) { (data, response, error) in
+        task = session.dataTask(with: ratesUrl!) { (data, response, error) in
+            DispatchQueue.main.async {
+                guard let data = data, error == nil else {
+                    print(error!)
+                    callback(false, nil)
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("response")
+                    callback(false, nil)
+                    return
+                }
+                guard
+                    let rates = try? JSONDecoder().decode(RatesList.self, from: data)
+                    else {
+                        print("rates")
+                        callback(false, nil)
+                        return
+                    }
+                print("OK")
+                callback(true, rates)
+            }
+            
+        }
+        task?.resume()
+    }
+    
+    func getCurrencies(callback: @escaping (Bool, CurrenciesList?) -> Void) {
+        task?.cancel()
+        task = session.dataTask(with: currenciesUrl!) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     callback(false, nil)
@@ -33,13 +64,13 @@ class ChangeService {
                     return
                 }
                 guard
-                    let changeRate = try? JSONDecoder().decode(ChangeRate.self, from: data)
+                    let currencies = try? JSONDecoder().decode(CurrenciesList.self, from: data)
                     else {
                         callback(false, nil)
                         return
-                    }
+                }
                 
-                callback(true, changeRate)
+                callback(true, currencies)
             }
             
         }

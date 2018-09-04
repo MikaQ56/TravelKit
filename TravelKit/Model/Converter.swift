@@ -10,16 +10,31 @@ import Foundation
 
 class Converter {
     
-    private var amount = Double()
+    private var amount:Double?
+    private var rates: RatesList?
+    private var currencies: CurrenciesList?
     
-    func convert(changeRate: ChangeRate, amount: String?) -> Double {
-        
+    func set(rates: RatesList) {
+        self.rates = rates
+    }
+    
+    func set(currencies: CurrenciesList) {
+        self.currencies = currencies
+    }
+    
+    func set(amount: String?) {
         if let amount = amount {
-            self.amount = Double(amount)!
+            if let amount = Double(amount) {
+                self.amount = amount
+            }
         }
-        if let rate = changeRate.rates["USD"] {
-            return self.amount * rate
+    }
+    
+    func euro(to currency: String) -> Double {
+        if let rate = rates!.rates[currency] {
+            return rate * amount!
         }
         return 0
     }
+    
 }

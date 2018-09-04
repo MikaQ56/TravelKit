@@ -8,7 +8,10 @@
 
 import Foundation
 
-struct ChangeRate : Decodable {
+struct RatesList: Decodable {
     let timestamp: Int
+    let date: String
     let rates: [String : Double]
 }
+
+
