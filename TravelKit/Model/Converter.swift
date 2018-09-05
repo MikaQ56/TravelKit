@@ -12,14 +12,19 @@ class Converter {
     
     private var amount:Double?
     private var rates: RatesList?
-    private var currencies: CurrenciesList?
+    private var currencies = [String]()
+    
     
     func set(rates: RatesList) {
         self.rates = rates
     }
     
     func set(currencies: CurrenciesList) {
-        self.currencies = currencies
+        self.currencies = Array(currencies.currencies.values)
+    }
+    
+    func getCurrencies() -> [String] {
+        return currencies
     }
     
     func set(amount: String?) {

@@ -19,6 +19,7 @@
 		CA0865D5213ECB140037F784 /* RatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865D4213ECB140037F784 /* RatesList.swift */; };
 		CA0865D7213EE3CC0037F784 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865D6213EE3CC0037F784 /* Converter.swift */; };
 		CA0865D9213F20030037F784 /* CurrenciesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865D8213F20030037F784 /* CurrenciesList.swift */; };
+		CA0865DB213FD0340037F784 /* ChangeResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865DA213FD0340037F784 /* ChangeResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		CA0865D4213ECB140037F784 /* RatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesList.swift; sourceTree = "<group>"; };
 		CA0865D6213EE3CC0037F784 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 		CA0865D8213F20030037F784 /* CurrenciesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesList.swift; sourceTree = "<group>"; };
+		CA0865DA213FD0340037F784 /* ChangeResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		CA0865C9213EA3710037F784 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CA0865DA213FD0340037F784 /* ChangeResultViewController.swift */,
 				CA0865CC213EBCDD0037F784 /* ChangeViewController.swift */,
 				CA0865CE213EBD3E0037F784 /* TranslateViewController.swift */,
 				CA0865D0213EBD5B0037F784 /* WeatherViewController.swift */,
@@ -247,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0865DB213FD0340037F784 /* ChangeResultViewController.swift in Sources */,
 				CA0865CD213EBCDD0037F784 /* ChangeViewController.swift in Sources */,
 				CA0865D3213EC08B0037F784 /* ChangeService.swift in Sources */,
 				CA0865D1213EBD5B0037F784 /* WeatherViewController.swift in Sources */,

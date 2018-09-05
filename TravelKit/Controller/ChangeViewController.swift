@@ -15,8 +15,8 @@ class ChangeViewController: UIViewController {
     
     private let changeService = ChangeService.shared
     
-    @IBOutlet weak var resultLabel: UILabel!
-    
+    @IBAction func convert(_ sender: Any) {
+    }
     
 }
 
@@ -29,6 +29,7 @@ extension ChangeViewController {
                 return
             }
             self.converter.set(currencies: currencies)
+            print(self.converter.getCurrencies())
         }
     }
     
@@ -43,6 +44,24 @@ extension ChangeViewController: UITextFieldDelegate {
         let amount = textField.text
         converter.set(amount: amount)
         return true
+    }
+}
+
+// MARK: - Picker view
+
+extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return converter.getCurrencies().count
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return converter.getCurrencies()[row]
     }
 }
 

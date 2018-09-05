@@ -9,5 +9,10 @@
 import Foundation
 
 struct CurrenciesList: Decodable {
-    let symbols : [String : String]
+    let currencies: [String : String]
+    
+    enum CodingKeys: String, CodingKey {
+        case currencies = "symbols"
+    }
 }
+
