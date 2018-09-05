@@ -8,6 +8,14 @@
 
 import Foundation
 
-struct TranslatedTextsList: Decodable {
-    private let data : [String : String]
+struct TranslatedTextsList: Codable {
+    let data : Translations
+}
+
+struct Translations: Codable {
+    let translations : [TranslatedText]
+}
+
+struct TranslatedText: Codable {
+    let translatedText: String
 }

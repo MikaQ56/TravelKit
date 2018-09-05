@@ -28,14 +28,18 @@ class TranslateService {
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
+                    print("Error: No data to decode")
                     callback(false, nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("Error: response")
                     callback(false, nil)
                     return
                 }
+                //let currencies = try? JSONDecoder().decode(CurrenciesList.self, from: data)
                 guard let translatedTextsList = try? JSONDecoder().decode(TranslatedTextsList.self, from: data ) else {
+                    print("Error: Couldn't decode data")
                     callback(false, nil)
                     return
                 }
@@ -48,7 +52,7 @@ class TranslateService {
     private func createTranslateRequest(text: String) -> URLRequest {
         var request = URLRequest(url: translateUrl)
         request.httpMethod = "POST"
-        let body = "key=\(key)&q=\(text)&source=fr&target=en&format=text"
+        let body = "key=\(key)&q=\(text)&source=fr&target=en"
         request.httpBody = body.data(using: .utf8)
         
         return request
