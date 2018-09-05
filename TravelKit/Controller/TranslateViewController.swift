@@ -11,7 +11,10 @@ import UIKit
 class TranslateViewController: UIViewController {
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
+        Converter.setCurrencies()
+        print("viewDidLoad_Change")
+        print("viewDidLoad_Translate")
     }
     
     private let translateService = TranslateService.shared

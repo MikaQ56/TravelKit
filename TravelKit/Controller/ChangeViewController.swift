@@ -28,8 +28,8 @@ class ChangeViewController: UIViewController {
 extension ChangeViewController {
     
     override func viewDidLoad() {
-        converter.setCurrencies()
-        print(converter.getCurrencies())
+        super.viewDidLoad()
+        print(Converter.getCurrencies())
     }
     
 }
@@ -55,11 +55,11 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return Converter.getCurrencies().count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "USD"
+        return Converter.getCurrencies()[row]
     }
 }
 

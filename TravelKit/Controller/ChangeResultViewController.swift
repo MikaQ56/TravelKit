@@ -11,9 +11,7 @@ import UIKit
 class ChangeResultViewController: UIViewController {
     
     override func viewDidLoad() {
-        resultLabel.text = String()
-        //let result = Converter.euro(to: "USD")
-        //resultLabel.text = String(result)
+        print("viewDidLoad_Result")
     }
     
     @IBOutlet weak var resultLabel: UILabel!

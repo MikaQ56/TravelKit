@@ -12,8 +12,8 @@ class Converter {
     
     static private var amount:Double?
     static private var rates: RatesList?
-    private var currencies = [String]()
-    private var changeService = ChangeService.shared
+    static private var currencies = [String]()
+    static private var changeService = ChangeService.shared
     static private var devise = "USD"
     
     static func set(amount: String?) {
@@ -42,11 +42,11 @@ class Converter {
         return rates
     }
     
-    private func update(currencies: CurrenciesList) {
+    static private func update(currencies: CurrenciesList) {
         self.currencies = Array(currencies.currencies.values)
     }
     
-    func setCurrencies() {
+    static func setCurrencies() {
         changeService.getCurrencies { (success, currencies) in
             guard success, let currencies = currencies else {
                 return
@@ -55,7 +55,7 @@ class Converter {
         }
     }
     
-    func getCurrencies() -> [String] {
+    static func getCurrencies() -> [String] {
         return currencies
     }
     

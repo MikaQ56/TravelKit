@@ -12,7 +12,7 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("viewDidLoad_Weather")
         // Do any additional setup after loading the view.
     }
 
