@@ -10,36 +10,59 @@ import Foundation
 
 class Converter {
     
-    private var amount:Double?
-    private var rates: RatesList?
+    static private var amount:Double?
+    static private var rates: RatesList?
     private var currencies = [String]()
+    private var changeService = ChangeService.shared
+    static private var devise = "USD"
     
+    static func set(amount: String?) {
+        if let amount = amount {
+            if let amount = Double(amount) {
+                self.amount = amount
+            } else {
+                self.amount = 0
+            }
+        }
+    }
     
-    func set(rates: RatesList) {
+    static func getAmount() -> Double? {
+        return amount
+    }
+    
+    static func getDevise() -> String {
+        return devise
+    }
+    
+    static func set(rates: RatesList) {
         self.rates = rates
     }
     
-    func set(currencies: CurrenciesList) {
+    static func getRates() -> RatesList? {
+        return rates
+    }
+    
+    private func update(currencies: CurrenciesList) {
         self.currencies = Array(currencies.currencies.values)
+    }
+    
+    func setCurrencies() {
+        changeService.getCurrencies { (success, currencies) in
+            guard success, let currencies = currencies else {
+                return
+            }
+            self.update(currencies: currencies)
+        }
     }
     
     func getCurrencies() -> [String] {
         return currencies
     }
     
-    func set(amount: String?) {
-        if let amount = amount {
-            if let amount = Double(amount) {
-                self.amount = amount
-            }
-        }
-    }
-    
-    func euro(to currency: String) -> Double {
-        if let rate = rates!.rates[currency] {
-            return rate * amount!
-        }
-        return 0
+    static func euro(to devise: String) -> Double {
+        let rate = rates!.rates[devise]
+        let result = amount! * rate!
+        return result
     }
     
 }

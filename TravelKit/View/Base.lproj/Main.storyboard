@@ -93,6 +93,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Change" image="round_monetization_on_white_24pt_1x" selectedImage="round_monetization_on_white_24pt_1x" id="SCn-WB-si3"/>
                     <navigationItem key="navigationItem" title="Convertisseur" id="08j-4h-T5N"/>
+                    <connections>
+                        <outlet property="amountTextField" destination="UfS-an-wj7" id="Gys-Ez-scc"/>
+                        <outlet property="devisePickerView" destination="0ps-Tn-KRz" id="xsM-vr-Q81"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g5z-UQ-qIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

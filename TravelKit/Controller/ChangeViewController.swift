@@ -15,7 +15,11 @@ class ChangeViewController: UIViewController {
     
     private let changeService = ChangeService.shared
     
+    @IBOutlet weak var devisePickerView: UIPickerView!
+    @IBOutlet weak var amountTextField: UITextField!
+   
     @IBAction func convert(_ sender: Any) {
+        Converter.set(amount: amountTextField.text)
     }
     
 }
@@ -24,13 +28,8 @@ class ChangeViewController: UIViewController {
 extension ChangeViewController {
     
     override func viewDidLoad() {
-        changeService.getCurrencies { (success, currencies) in
-            guard success, let currencies = currencies else {
-                return
-            }
-            self.converter.set(currencies: currencies)
-            print(self.converter.getCurrencies())
-        }
+        converter.setCurrencies()
+        print(converter.getCurrencies())
     }
     
 }
@@ -42,7 +41,7 @@ extension ChangeViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         updateRates()
         let amount = textField.text
-        converter.set(amount: amount)
+        Converter.set(amount: amount)
         return true
     }
 }
@@ -56,12 +55,11 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return converter.getCurrencies().count
-        
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return converter.getCurrencies()[row]
+        return "USD"
     }
 }
 
@@ -73,7 +71,7 @@ extension ChangeViewController {
             guard success, let rates = rates else {
                 return
             }
-            self.converter.set(rates: rates)
+            Converter.set(rates: rates)
         }
     }
 }

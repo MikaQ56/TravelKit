@@ -9,7 +9,12 @@
 import UIKit
 
 class ChangeResultViewController: UIViewController {
-
+    
+    override func viewDidLoad() {
+        resultLabel.text = String()
+        let result = Converter.euro(to: "USD")
+        resultLabel.text = String(result)
+    }
     
     @IBOutlet weak var resultLabel: UILabel!
 }
