@@ -23,6 +23,7 @@
 		CA0865DF21400E190037F784 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865DE21400E190037F784 /* WeatherService.swift */; };
 		CA0865E1214022140037F784 /* TranslateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865E0214022140037F784 /* TranslateService.swift */; };
 		CA0865E3214029A50037F784 /* TranslatedTextsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865E2214029A50037F784 /* TranslatedTextsList.swift */; };
+		CA0865E52141528E0037F784 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0865E42141528E0037F784 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		CA0865DE21400E190037F784 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		CA0865E0214022140037F784 /* TranslateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateService.swift; sourceTree = "<group>"; };
 		CA0865E2214029A50037F784 /* TranslatedTextsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedTextsList.swift; sourceTree = "<group>"; };
+		CA0865E42141528E0037F784 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		CA0865C9213EA3710037F784 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CA0865E42141528E0037F784 /* HomeViewController.swift */,
 				CA0865DA213FD0340037F784 /* ChangeResultViewController.swift */,
 				CA0865CC213EBCDD0037F784 /* ChangeViewController.swift */,
 				CA0865CE213EBD3E0037F784 /* TranslateViewController.swift */,
@@ -270,6 +273,7 @@
 				CA0865A9213EA3560037F784 /* AppDelegate.swift in Sources */,
 				CA0865CF213EBD3E0037F784 /* TranslateViewController.swift in Sources */,
 				CA0865D9213F20030037F784 /* CurrenciesList.swift in Sources */,
+				CA0865E52141528E0037F784 /* HomeViewController.swift in Sources */,
 				CA0865D5213ECB140037F784 /* RatesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

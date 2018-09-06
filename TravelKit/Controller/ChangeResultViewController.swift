@@ -14,5 +14,6 @@ class ChangeResultViewController: UIViewController {
         print("viewDidLoad_Result")
     }
     
+    @IBOutlet weak var deviseLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
 }
