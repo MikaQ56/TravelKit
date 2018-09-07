@@ -29,7 +29,6 @@ extension ChangeViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Converter.getCurrencies())
     }
     
 }
