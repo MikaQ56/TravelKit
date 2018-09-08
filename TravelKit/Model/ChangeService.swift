@@ -22,7 +22,7 @@ class ChangeService {
     
     private var task: URLSessionDataTask?
     
-    func getRates(callback: @escaping (Bool, RatesList?) -> Void) {
+    func getRates(callback: @escaping (Bool, Rates?) -> Void) {
         task?.cancel()
         task = session.dataTask(with: ratesUrl!) { (data, response, error) in
             DispatchQueue.main.async {
@@ -37,7 +37,7 @@ class ChangeService {
                     return
                 }
                 guard
-                    let rates = try? JSONDecoder().decode(RatesList.self, from: data)
+                    let rates = try? JSONDecoder().decode(Rates.self, from: data)
                     else {
                         print("rates")
                         callback(false, nil)
@@ -51,7 +51,7 @@ class ChangeService {
         task?.resume()
     }
     
-    func getCurrencies(callback: @escaping (Bool, CurrenciesList?) -> Void) {
+    func getCurrencies(callback: @escaping (Bool, Currencies?) -> Void) {
         task?.cancel()
         task = session.dataTask(with: currenciesUrl!) { (data, response, error) in
             DispatchQueue.main.async {
@@ -64,7 +64,7 @@ class ChangeService {
                     return
                 }
                 guard
-                    let currencies = try? JSONDecoder().decode(CurrenciesList.self, from: data)
+                    let currencies = try? JSONDecoder().decode(Currencies.self, from: data)
                     else {
                         callback(false, nil)
                         return

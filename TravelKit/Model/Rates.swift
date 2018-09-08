@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RatesList: Decodable {
+struct Rates: Codable {
     let timestamp: Int
     let date: String
     let rates: [String : Double]

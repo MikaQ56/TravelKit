@@ -8,7 +8,21 @@
 
 import Foundation
 
-struct TranslatedTextsList: Codable {
+struct Translator: Codable {
+    
+    let data: Translations
+    
+    struct Translations: Codable {
+        
+        let translations: [TranslatedText]
+        
+        struct TranslatedText: Codable {
+            let translatedText: String
+        }
+    }
+}
+
+/*struct TranslatedTextsList: Codable {
     let data : Translations
 }
 
@@ -18,4 +32,4 @@ struct Translations: Codable {
 
 struct TranslatedText: Codable {
     let translatedText: String
-}
+}*/

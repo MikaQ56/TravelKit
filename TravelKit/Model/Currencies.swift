@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CurrenciesList: Decodable {
+struct Currencies: Codable {
     let currencies: [String : String]
     
     enum CodingKeys: String, CodingKey {

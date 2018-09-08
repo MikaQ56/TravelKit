@@ -68,7 +68,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="270" height="48"/>
                                         <color key="backgroundColor" red="0.89803921568627454" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="27"/>
+                                        <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="27"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                         <connections>
                                             <outlet property="delegate" destination="tch-rv-HGn" id="Mge-eY-qgv"/>
@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7n1-SL-2zc">
-                                <rect key="frame" x="131.5" y="264" width="112" height="139"/>
+                                <rect key="frame" x="131.5" y="314.5" width="112" height="38.5"/>
                                 <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="38"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -141,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ci2-eS-Okf">
-                                <rect key="frame" x="158.5" y="423" width="58" height="30"/>
+                                <rect key="frame" x="158.5" y="354" width="58" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3RM-8o-2Mz"/>
                                 </constraints>
@@ -157,14 +157,13 @@
                             <constraint firstItem="GoZ-Sd-uyN" firstAttribute="trailing" secondItem="40U-Sl-9bJ" secondAttribute="trailing" id="LEi-FO-gwW"/>
                             <constraint firstItem="GoZ-Sd-uyN" firstAttribute="leading" secondItem="40U-Sl-9bJ" secondAttribute="leading" id="LhT-Jg-Dhc"/>
                             <constraint firstItem="7n1-SL-2zc" firstAttribute="centerX" secondItem="MCD-vQ-WAw" secondAttribute="centerX" id="bqM-1Y-Mzr"/>
-                            <constraint firstItem="ci2-eS-Okf" firstAttribute="top" secondItem="7n1-SL-2zc" secondAttribute="bottom" constant="20" id="dOP-Tb-72d"/>
+                            <constraint firstItem="ci2-eS-Okf" firstAttribute="top" secondItem="7n1-SL-2zc" secondAttribute="bottom" constant="1" id="dOP-Tb-72d"/>
                             <constraint firstItem="ci2-eS-Okf" firstAttribute="centerX" secondItem="MCD-vQ-WAw" secondAttribute="centerX" id="rSZ-rT-JaT"/>
-                            <constraint firstItem="40U-Sl-9bJ" firstAttribute="bottom" secondItem="ci2-eS-Okf" secondAttribute="bottom" constant="214" id="snd-fF-eBw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="40U-Sl-9bJ"/>
                     </view>
                     <connections>
-                        <outlet property="deviseLabel" destination="ci2-eS-Okf" id="odL-Gc-lms"/>
+                        <outlet property="currencyLabel" destination="ci2-eS-Okf" id="XLo-87-URo"/>
                         <outlet property="resultLabel" destination="7n1-SL-2zc" id="f9H-Um-AiU"/>
                     </connections>
                 </viewController>
@@ -259,7 +258,9 @@
                     <tabBarItem key="tabBarItem" title="Translate" image="round_translate_white_24pt_1x" selectedImage="round_translate_white_24pt_1x" id="5KO-K2-L5E"/>
                     <navigationItem key="navigationItem" title="Traducteur" id="bSh-fy-ABY"/>
                     <connections>
+                        <outlet property="languageButton" destination="QTs-F4-Lr9" id="YWk-hA-NFP"/>
                         <outlet property="textToTranslate" destination="cNU-jw-f5n" id="Hlf-9Z-2M7"/>
+                        <outlet property="textTranslated" destination="ZTA-gS-ckd" id="gKV-fP-HaF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N89-vB-7Pf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,10 +272,10 @@
             </objects>
             <point key="canvasLocation" x="321" y="-2098"/>
         </scene>
-        <!--View Controller-->
+        <!--Language View Controller-->
         <scene sceneID="cKy-pC-Oaq">
             <objects>
-                <viewController id="vDv-My-jco" sceneMemberID="viewController">
+                <viewController id="vDv-My-jco" customClass="LanguageViewController" customModule="TravelKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bzA-7m-kns">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,60 +299,96 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYf-IC-32j">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="122"/>
                                                 <state key="normal" image="de"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="1re-xi-Yrl"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZW-ph-9Er">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZW-ph-9Er">
                                                 <rect key="frame" x="0.0" y="122" width="114.5" height="121.5"/>
                                                 <state key="normal" image="da"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="lYt-N1-lxV"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xsu-x4-htk">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xsu-x4-htk">
                                                 <rect key="frame" x="0.0" y="243.5" width="114.5" height="122"/>
                                                 <state key="normal" image="no"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="A4G-Ty-4WC"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0i-dd-uO9">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0i-dd-uO9">
                                                 <rect key="frame" x="0.0" y="365.5" width="114.5" height="121.5"/>
                                                 <state key="normal" image="el"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="ceB-ix-jto"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ddI-YJ-v5r">
                                         <rect key="frame" x="114.5" y="0.0" width="114" height="487"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEP-sE-tjs">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEP-sE-tjs">
                                                 <rect key="frame" x="22" y="0.0" width="70" height="122"/>
                                                 <state key="normal" image="en"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="KwB-kF-AXv"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVP-0q-pLb">
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVP-0q-pLb">
                                                 <rect key="frame" x="22" y="122" width="70" height="121.5"/>
                                                 <state key="normal" image="es"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="Fnv-fb-scN"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZB-we-TnQ">
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZB-we-TnQ">
                                                 <rect key="frame" x="22" y="243.5" width="70" height="122"/>
                                                 <state key="normal" image="fi"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="GEI-5p-L2f"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGz-Py-gJl">
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGz-Py-gJl">
                                                 <rect key="frame" x="22" y="365.5" width="70" height="121.5"/>
                                                 <state key="normal" image="ga"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="sDq-An-tDh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JKw-Fs-Ow8">
                                         <rect key="frame" x="228.5" y="0.0" width="114.5" height="487"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aks-7X-JZ1">
+                                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aks-7X-JZ1">
                                                 <rect key="frame" x="22.5" y="0.0" width="70" height="122"/>
                                                 <state key="normal" image="is"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="xHB-P6-5I8"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vj7-HZ-g6v">
+                                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vj7-HZ-g6v">
                                                 <rect key="frame" x="22.5" y="122" width="70" height="121.5"/>
                                                 <state key="normal" image="it"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="RBU-Zh-eTQ"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puO-S4-AS3">
+                                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puO-S4-AS3">
                                                 <rect key="frame" x="22.5" y="243.5" width="70" height="122"/>
                                                 <state key="normal" image="ja"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="rEY-rC-FGG"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cT-MA-B1N">
+                                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cT-MA-B1N">
                                                 <rect key="frame" x="22.5" y="365.5" width="70" height="121.5"/>
                                                 <state key="normal" image="nl"/>
+                                                <connections>
+                                                    <action selector="tappedLanguageButton:" destination="vDv-My-jco" eventType="touchUpInside" id="2dC-0u-idh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -370,6 +407,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AXF-8S-eJ1"/>
                     </view>
+                    <connections>
+                        <outletCollection property="languageButtons" destination="eYf-IC-32j" collectionClass="NSMutableArray" id="FZS-bb-qqw"/>
+                        <outletCollection property="languageButtons" destination="gZW-ph-9Er" collectionClass="NSMutableArray" id="8Av-XM-AZ4"/>
+                        <outletCollection property="languageButtons" destination="Xsu-x4-htk" collectionClass="NSMutableArray" id="GhK-Te-NsU"/>
+                        <outletCollection property="languageButtons" destination="J0i-dd-uO9" collectionClass="NSMutableArray" id="Rz5-7e-zO2"/>
+                        <outletCollection property="languageButtons" destination="UEP-sE-tjs" collectionClass="NSMutableArray" id="ETO-b4-Xbp"/>
+                        <outletCollection property="languageButtons" destination="ZVP-0q-pLb" collectionClass="NSMutableArray" id="owv-5A-Xx1"/>
+                        <outletCollection property="languageButtons" destination="dZB-we-TnQ" collectionClass="NSMutableArray" id="awm-S0-R1x"/>
+                        <outletCollection property="languageButtons" destination="hGz-Py-gJl" collectionClass="NSMutableArray" id="7Qg-Zi-lOu"/>
+                        <outletCollection property="languageButtons" destination="Aks-7X-JZ1" collectionClass="NSMutableArray" id="8GN-C4-vev"/>
+                        <outletCollection property="languageButtons" destination="vj7-HZ-g6v" collectionClass="NSMutableArray" id="QRo-Ew-tHl"/>
+                        <outletCollection property="languageButtons" destination="puO-S4-AS3" collectionClass="NSMutableArray" id="KDs-mN-Akv"/>
+                        <outletCollection property="languageButtons" destination="0cT-MA-B1N" collectionClass="NSMutableArray" id="8nK-g2-E7o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OMt-La-yqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -464,7 +515,7 @@
                                                 <rect key="frame" x="0.0" y="98" width="167.5" height="40.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TemperatureWeather" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqM-3q-n7e">
-                                                        <rect key="frame" x="0.0" y="0.0" width="41" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="40.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ZqM-3q-n7e" secondAttribute="height" multiplier="1:1" id="vjd-v8-1f9"/>
                                                         </constraints>
@@ -542,7 +593,7 @@
                                                 <rect key="frame" x="0.0" y="52.5" width="167.5" height="45"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StrongWind" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-tJ-HAj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="44.5" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="44" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sfF-tJ-HAj" secondAttribute="height" multiplier="1:1" id="aca-D4-NMx"/>
                                                         </constraints>
@@ -614,6 +665,20 @@
                         <viewLayoutGuide key="safeArea" id="0RY-6G-C76"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="round_wb_sunny_white_24pt_1x" selectedImage="round_wb_sunny_white_24pt_1x" id="6aJ-4Z-NPR"/>
+                    <connections>
+                        <outlet property="sunriseAbroadLabel" destination="7Pn-PB-hHS" id="rP2-5A-2W0"/>
+                        <outlet property="sunriseLabel" destination="Zzk-WS-hiW" id="WAR-8r-f30"/>
+                        <outlet property="sunsetAbroadLabel" destination="O2N-xc-Kph" id="yTj-f5-gvc"/>
+                        <outlet property="sunsetLabel" destination="3jU-QH-pJp" id="5VU-qt-VUP"/>
+                        <outlet property="temperatureAbroadLabel" destination="D0x-6C-c6H" id="Kog-uU-ASK"/>
+                        <outlet property="temperatureLabel" destination="ZDv-27-2qZ" id="tem-I7-bcC"/>
+                        <outlet property="weatherAbroadImage" destination="V8o-fZ-gFB" id="XD3-zJ-9oh"/>
+                        <outlet property="weatherAbroadLabel" destination="Llr-zM-uQw" id="BCO-7b-X84"/>
+                        <outlet property="weatherHomeImage" destination="d2N-ML-lNx" id="QID-1R-rkN"/>
+                        <outlet property="weatherHomeLabel" destination="uGt-WQ-HL0" id="Ftr-Go-Owq"/>
+                        <outlet property="windAbroadLabel" destination="JqK-Al-7yC" id="hjM-ZM-9MK"/>
+                        <outlet property="windLabel" destination="6vZ-E4-5vX" id="4Hp-np-o2s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4v-TC-ElL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

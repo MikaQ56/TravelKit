@@ -20,6 +20,9 @@ class ChangeViewController: UIViewController {
    
     @IBAction func convert(_ sender: Any) {
         Converter.set(amount: amountTextField.text)
+        let currencyIndex = devisePickerView.selectedRow(inComponent: 0)
+        Converter.setCurrencySymbol(index: currencyIndex)
+        Converter.convertFromEuro()
     }
     
 }
@@ -29,6 +32,7 @@ extension ChangeViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateRates()
     }
     
 }
@@ -38,7 +42,6 @@ extension ChangeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        updateRates()
         let amount = textField.text
         Converter.set(amount: amount)
         return true
@@ -46,7 +49,6 @@ extension ChangeViewController: UITextFieldDelegate {
 }
 
 // MARK: - Picker view
-
 extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -58,7 +60,8 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Converter.getCurrencies()[row]
+        var currenciesValues = Array(Converter.getCurrencies().values)
+        return currenciesValues[row]
     }
 }
 

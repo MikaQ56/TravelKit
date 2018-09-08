@@ -10,10 +10,21 @@ import UIKit
 
 class TranslateViewController: UIViewController {
     
-    private let translateService = TranslateService.shared
+    private let translatorService = TranslatorService.shared
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        languageButton.setImage(UIImage(named: "en"), for: UIControlState.normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let target = translatorService.getTarget()
+        languageButton.setImage(UIImage(named: target), for: UIControlState.normal)
+    }
 
     @IBOutlet weak var textTranslated: UILabel!
     @IBOutlet weak var textToTranslate: UITextView!
+    @IBOutlet weak var languageButton: UIButton!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         textToTranslate.resignFirstResponder()
@@ -21,11 +32,12 @@ class TranslateViewController: UIViewController {
     
     @IBAction func translate(_ sender: Any) {
         let text = textToTranslate.text!
-        translateService.translate(text: text) { (success, translatedTextsList) in
-            guard success, let translatedTextsList = translatedTextsList else {
+        translatorService.translate(text: text) { (success, translator) in
+            guard success, let translator = translator else {
                 return
             }
-            print(translatedTextsList.data.translations[0].translatedText)
+            print(translator.data.translations[0].translatedText)
+            self.textTranslated.text = translator.data.translations[0].translatedText
         }
     }
 }

@@ -11,10 +11,12 @@ import Foundation
 class Converter {
     
     static private var amount:Double?
-    static private var rates: RatesList?
-    static private var currencies = [String]()
+    static private var rates: Rates?
+    static private var rate: Double?
+    static private var currencies = [String : String]()
     static private var changeService = ChangeService.shared
-    static private var devise = "USD"
+    static private var currencySymbol = "USD"
+    static private var result: Double?
     
     static func set(amount: String?) {
         if let amount = amount {
@@ -30,20 +32,20 @@ class Converter {
         return amount
     }
     
-    static func getDevise() -> String {
-        return devise
+    static func getCurrencySymbol() -> String {
+        return currencySymbol
     }
     
-    static func set(rates: RatesList) {
+    static func set(rates: Rates) {
         self.rates = rates
     }
     
-    static func getRates() -> RatesList? {
+    static func getRates() -> Rates? {
         return rates
     }
     
-    static private func update(currencies: CurrenciesList) {
-        self.currencies = Array(currencies.currencies.values)
+    static private func update(currencies: Currencies) {
+        self.currencies = currencies.currencies
     }
     
     static func setCurrencies() {
@@ -55,14 +57,25 @@ class Converter {
         }
     }
     
-    static func getCurrencies() -> [String] {
+    static func getCurrencies() -> [String : String] {
         return currencies
     }
     
-    static func euro(to devise: String) -> Double {
-        let rate = rates!.rates[devise]
-        let result = amount! * rate!
-        return result
+    static func setCurrencySymbol(index: Int){
+        for (i, symbol) in currencies.keys.enumerated() {
+            if i == index {
+                currencySymbol = symbol
+            }
+        }
+    }
+    
+    static func convertFromEuro(){
+        rate = rates!.rates[currencySymbol]
+        result = amount! * rate!
+    }
+    
+    static func getResult() -> Double {
+        return result!
     }
     
 }

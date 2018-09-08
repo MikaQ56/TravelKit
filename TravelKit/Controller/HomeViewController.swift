@@ -13,6 +13,13 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Converter.setCurrencies()
+        let weatherService = WeatherService.shared
+        weatherService.getWeather(city: "lorient") { (success, weather) in
+            guard success, let weatherHome = weather else {
+                return
+            }
+            weatherService.set(weather: weatherHome)
+        }
     }
 
 }

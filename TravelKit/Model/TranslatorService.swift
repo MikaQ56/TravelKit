@@ -8,13 +8,15 @@
 
 import Foundation
 
-class TranslateService {
+class TranslatorService {
     
-    static let shared = TranslateService()
+    static let shared = TranslatorService()
+    
+    private var target = "en"
     
     private init(){}
     
-    private let translateUrl = URL(string: "https://translation.googleapis.com/language/translate/v2")!
+    private let translatorUrl = URL(string: "https://translation.googleapis.com/language/translate/v2")!
     
     private let key = "AIzaSyBgwqShF3Thl_B-0-P93uTE1RIMMjPsIwQ"
     
@@ -22,7 +24,7 @@ class TranslateService {
     
     private var task: URLSessionDataTask?
     
-    func translate(text: String, callback: @escaping (Bool, TranslatedTextsList?) -> Void) {
+    func translate(text: String, callback: @escaping (Bool, Translator?) -> Void) {
         let request = createTranslateRequest(text: text)
         task?.cancel()
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -37,25 +39,31 @@ class TranslateService {
                     callback(false, nil)
                     return
                 }
-                //let currencies = try? JSONDecoder().decode(CurrenciesList.self, from: data)
-                guard let translatedTextsList = try? JSONDecoder().decode(TranslatedTextsList.self, from: data ) else {
+                guard let translator = try? JSONDecoder().decode(Translator.self, from: data ) else {
                     print("Error: Couldn't decode data")
                     callback(false, nil)
                     return
                 }
-                callback(true, translatedTextsList)
+                callback(true, translator)
             }
         })
         task?.resume()
     }
     
     private func createTranslateRequest(text: String) -> URLRequest {
-        var request = URLRequest(url: translateUrl)
+        var request = URLRequest(url: translatorUrl)
         request.httpMethod = "POST"
-        let body = "key=\(key)&q=\(text)&source=fr&target=en"
+        let body = "key=\(key)&q=\(text)&source=fr&target=\(target)"
         request.httpBody = body.data(using: .utf8)
         
         return request
     }
     
+    func set(target: String) {
+        self.target = target
+    }
+    
+    func getTarget() -> String {
+        return target
+    }
 }
