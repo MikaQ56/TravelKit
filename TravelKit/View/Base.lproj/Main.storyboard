@@ -85,6 +85,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.69803921568627447" green="0.87450980392156863" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="u3Q-Ua-jSY" firstAttribute="leading" secondItem="TSa-zh-lfB" secondAttribute="leading" id="Da8-M5-X1a"/>
                             <constraint firstItem="u3Q-Ua-jSY" firstAttribute="trailing" secondItem="TSa-zh-lfB" secondAttribute="trailing" id="EAS-O6-hhK"/>
@@ -104,6 +105,9 @@
                             <constraint firstItem="Uml-Mu-I7G" firstAttribute="leading" secondItem="TSa-zh-lfB" secondAttribute="leading" id="wHt-h5-6P3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TSa-zh-lfB"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="RKg-EA-zY5" appends="YES" id="HSj-pP-PQG"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Change" image="round_monetization_on_white_24pt_1x" selectedImage="round_monetization_on_white_24pt_1x" id="SCn-WB-si3"/>
                     <navigationItem key="navigationItem" title="Convertisseur" id="08j-4h-T5N"/>
@@ -113,6 +117,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g5z-UQ-qIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RKg-EA-zY5">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="tch-rv-HGn" id="3qB-Zt-ieq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1007.2" y="-2098.2008995502251"/>
         </scene>
@@ -460,7 +469,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xL2-cd-Sen">
                                         <rect key="frame" x="0.0" y="51.5" width="167.5" height="84.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun-weather-icon" translatesAutoresizingMaskIntoConstraints="NO" id="d2N-ML-lNx">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d2N-ML-lNx">
                                                 <rect key="frame" x="52" y="0.0" width="64" height="64"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="d2N-ML-lNx" secondAttribute="height" multiplier="1:1" id="oaE-6N-zoZ"/>
@@ -515,7 +524,7 @@
                                                 <rect key="frame" x="0.0" y="98" width="167.5" height="40.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TemperatureWeather" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZqM-3q-n7e">
-                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="40.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="41" height="40.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ZqM-3q-n7e" secondAttribute="height" multiplier="1:1" id="vjd-v8-1f9"/>
                                                         </constraints>
@@ -555,7 +564,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ywu-jY-l9C">
                                         <rect key="frame" x="0.0" y="54" width="167.5" height="94.5"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tornado" translatesAutoresizingMaskIntoConstraints="NO" id="V8o-fZ-gFB">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V8o-fZ-gFB">
                                                 <rect key="frame" x="47" y="0.0" width="74" height="74"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="V8o-fZ-gFB" secondAttribute="height" multiplier="1:1" id="wHs-xW-DOM"/>
@@ -593,7 +602,7 @@
                                                 <rect key="frame" x="0.0" y="52.5" width="167.5" height="45"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StrongWind" translatesAutoresizingMaskIntoConstraints="NO" id="sfF-tJ-HAj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="44" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="44.5" height="45"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sfF-tJ-HAj" secondAttribute="height" multiplier="1:1" id="aca-D4-NMx"/>
                                                         </constraints>
@@ -776,7 +785,6 @@
         <image name="Sunrise" width="68" height="68"/>
         <image name="Sunset" width="68" height="68"/>
         <image name="TemperatureWeather" width="70" height="70"/>
-        <image name="Tornado" width="61" height="74"/>
         <image name="TravelKit1024" width="1024" height="1024"/>
         <image name="da" width="70" height="70"/>
         <image name="de" width="70" height="70"/>
@@ -794,6 +802,5 @@
         <image name="round_monetization_on_white_24pt_1x" width="24" height="24"/>
         <image name="round_translate_white_24pt_1x" width="24" height="24"/>
         <image name="round_wb_sunny_white_24pt_1x" width="24" height="24"/>
-        <image name="sun-weather-icon" width="64" height="63"/>
     </resources>
 </document>

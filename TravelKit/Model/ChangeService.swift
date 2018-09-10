@@ -27,23 +27,19 @@ class ChangeService {
         task = session.dataTask(with: ratesUrl!) { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    print(error!)
                     callback(false, nil)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print("response")
                     callback(false, nil)
                     return
                 }
                 guard
                     let rates = try? JSONDecoder().decode(Rates.self, from: data)
                     else {
-                        print("rates")
                         callback(false, nil)
                         return
-                    }
-                print("OK")
+                }
                 callback(true, rates)
             }
             

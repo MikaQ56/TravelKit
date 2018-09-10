@@ -11,6 +11,12 @@ import UIKit
 class TranslateViewController: UIViewController {
     
     private let translatorService = TranslatorService.shared
+    @IBOutlet weak var textTranslated: UILabel!
+    @IBOutlet weak var textToTranslate: UITextView!
+    @IBOutlet weak var languageButton: UIButton!
+}
+
+extension TranslateViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +27,9 @@ class TranslateViewController: UIViewController {
         let target = translatorService.getTarget()
         languageButton.setImage(UIImage(named: target), for: UIControlState.normal)
     }
+}
 
-    @IBOutlet weak var textTranslated: UILabel!
-    @IBOutlet weak var textToTranslate: UITextView!
-    @IBOutlet weak var languageButton: UIButton!
+extension TranslateViewController {
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         textToTranslate.resignFirstResponder()
@@ -34,11 +39,18 @@ class TranslateViewController: UIViewController {
         let text = textToTranslate.text!
         translatorService.translate(text: text) { (success, translator) in
             guard success, let translator = translator else {
+                self.translatorAlert()
                 return
             }
             print(translator.data.translations[0].translatedText)
             self.textTranslated.text = translator.data.translations[0].translatedText
         }
+    }
+    
+    private func translatorAlert() {
+        let alertVC = UIAlertController(title: "Erreur", message: "La demande de tarduction n'a pas pu aboutir", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
 }
 

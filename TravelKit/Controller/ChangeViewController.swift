@@ -8,6 +8,15 @@
 
 import UIKit
 
+// MARK: - Controller's life cycle
+extension ChangeViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateRates()
+    }
+}
+
 // MARK: - Outlets & properties
 class ChangeViewController: UIViewController {
 
@@ -19,23 +28,32 @@ class ChangeViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
    
     @IBAction func convert(_ sender: Any) {
-        Converter.set(amount: amountTextField.text)
+        if !Converter.set(amount: amountTextField.text) { amountAlert()}
         let currencyIndex = devisePickerView.selectedRow(inComponent: 0)
         Converter.setCurrencySymbol(index: currencyIndex)
         Converter.convertFromEuro()
     }
-    
 }
 
-// MARK: - Controller's life cycle
+// MARK: - Alerts
 extension ChangeViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateRates()
+    private func amountAlert() {
+        let alert = UIAlertController(title: "Erreur", message: "Vous n'avez pas saisi un montant valide", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func requestAlert() {
+        let alertVC = UIAlertController(title: "Erreur", message: "Les taux de change ne sont pas actualisés", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
     
 }
+
+
 
 // MARK: - Keyboard
 extension ChangeViewController: UITextFieldDelegate {
@@ -43,8 +61,13 @@ extension ChangeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         let amount = textField.text
-        Converter.set(amount: amount)
+        let result = Converter.set(amount: amount)
+        print(result)
         return true
+    }
+    
+    @IBAction func dismissKeyboard() {
+        amountTextField.resignFirstResponder()
     }
 }
 
@@ -71,6 +94,7 @@ extension ChangeViewController {
     private func updateRates() {
         changeService.getRates { (success, rates) in
             guard success, let rates = rates else {
+                self.requestAlert()
                 return
             }
             Converter.set(rates: rates)

@@ -18,14 +18,17 @@ class Converter {
     static private var currencySymbol = "USD"
     static private var result: Double?
     
-    static func set(amount: String?) {
+    static func set(amount: String?) -> Bool {
         if let amount = amount {
             if let amount = Double(amount) {
                 self.amount = amount
+                return true
             } else {
                 self.amount = 0
+                return false
             }
         }
+        return false
     }
     
     static func getAmount() -> Double? {
@@ -44,17 +47,8 @@ class Converter {
         return rates
     }
     
-    static private func update(currencies: Currencies) {
+    static func update(currencies: Currencies) {
         self.currencies = currencies.currencies
-    }
-    
-    static func setCurrencies() {
-        changeService.getCurrencies { (success, currencies) in
-            guard success, let currencies = currencies else {
-                return
-            }
-            self.update(currencies: currencies)
-        }
     }
     
     static func getCurrencies() -> [String : String] {
