@@ -11,13 +11,13 @@ import UIKit
 class ChangeResultViewController: UIViewController {
     
     override func viewDidLoad() {
-        let result = Int(Converter.getResult().rounded())
-        resultLabel.text = String(result)
-        var currencies = Converter.getCurrencies()
-        let symbol = Converter.getCurrencySymbol()
-        currencyLabel.text = currencies[symbol]
+        let result = Converter.convertFromEuro()
+        resultLabel.text = result
+        currencyLabel.text = Converter.getCurrency()
+        dateLabel.text = Converter.getDate()
     }
     
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
 }

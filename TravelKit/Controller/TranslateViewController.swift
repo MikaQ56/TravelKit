@@ -37,9 +37,9 @@ extension TranslateViewController {
     
     @IBAction func translate(_ sender: Any) {
         let text = textToTranslate.text!
-        translatorService.translate(text: text) { (success, translator) in
+        translatorService.translate(text: text) { (success, translator, state) in
             guard success, let translator = translator else {
-                self.translatorAlert()
+                self.alert(title: "Traducteur", message: state.rawValue)
                 return
             }
             print(translator.data.translations[0].translatedText)
@@ -47,8 +47,8 @@ extension TranslateViewController {
         }
     }
     
-    private func translatorAlert() {
-        let alertVC = UIAlertController(title: "Erreur", message: "La demande de tarduction n'a pas pu aboutir", preferredStyle: .alert)
+    private func alert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }

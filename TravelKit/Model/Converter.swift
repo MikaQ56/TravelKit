@@ -16,9 +16,12 @@ class Converter {
     static private var currencies = [String : String]()
     static private var changeService = ChangeService.shared
     static private var currencySymbol = "USD"
-    static private var result: Double?
     
-    static func set(amount: String?) -> Bool {
+    static func save(rates: Rates) {
+        self.rates = rates
+    }
+    
+    static func save(amount: String?) -> Bool {
         if let amount = amount {
             if let amount = Double(amount) {
                 self.amount = amount
@@ -31,20 +34,12 @@ class Converter {
         return false
     }
     
-    static func getAmount() -> Double? {
-        return amount
-    }
-    
-    static func getCurrencySymbol() -> String {
-        return currencySymbol
-    }
-    
-    static func set(rates: Rates) {
-        self.rates = rates
-    }
-    
-    static func getRates() -> Rates? {
-        return rates
+    static func getCurrency() -> String {
+        let currency = currencies[currencySymbol]
+        if let currency = currency {
+            return currency
+        }
+        return ""
     }
     
     static func update(currencies: Currencies) {
@@ -63,13 +58,21 @@ class Converter {
         }
     }
     
-    static func convertFromEuro(){
+    static func getDate() -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(rates!.timestamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "fr_FR")
+        return dateFormatter.string(from: date)
+    }
+    
+    static func convertFromEuro() -> String {
         rate = rates!.rates[currencySymbol]
-        result = amount! * rate!
+        guard let rate = rate else {
+            return "La devise n'existe pas !"
+        }
+        let result = amount! * rate
+        return String(Int(result.rounded()))
     }
-    
-    static func getResult() -> Double {
-        return result!
-    }
-    
 }

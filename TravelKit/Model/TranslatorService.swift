@@ -16,35 +16,36 @@ class TranslatorService {
     
     private init(){}
     
+    init(session: URLSession) {
+        self.session = session
+    }
+    
     private let translatorUrl = URL(string: "https://translation.googleapis.com/language/translate/v2")!
     
     private let key = "AIzaSyBgwqShF3Thl_B-0-P93uTE1RIMMjPsIwQ"
     
-    private let session = URLSession(configuration: .default)
+    private var session = URLSession(configuration: .default)
     
     private var task: URLSessionDataTask?
     
-    func translate(text: String, callback: @escaping (Bool, Translator?) -> Void) {
+    func translate(text: String, callback: @escaping (Bool, Translator?, Request) -> Void) {
         let request = createTranslateRequest(text: text)
         task?.cancel()
         task = session.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    print("Error: No data to decode")
-                    callback(false, nil)
+                    callback(false, nil, Request.errorRequest)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print("Error: response")
-                    callback(false, nil)
+                    callback(false, nil, Request.errorServer)
                     return
                 }
                 guard let translator = try? JSONDecoder().decode(Translator.self, from: data ) else {
-                    print("Error: Couldn't decode data")
-                    callback(false, nil)
+                    callback(false, nil, Request.errorData)
                     return
                 }
-                callback(true, translator)
+                callback(true, translator, Request.succeed)
             }
         })
         task?.resume()

@@ -14,11 +14,15 @@ class WeatherService {
     
     private init(){}
     
+    init(session: URLSession) {
+        self.session = session
+    }
+    
     private var weatherHome: Weather?
     
     private var weatherUrl = URL(string: "http://query.yahooapis.com/v1/public/yql")
     
-    private let session = URLSession(configuration: .default)
+    private var session = URLSession(configuration: .default)
     
     private var task: URLSessionDataTask?
     
@@ -30,30 +34,30 @@ class WeatherService {
         return weatherHome!
     }
     
-    func getWeather(city: String, callback: @escaping (Bool, Weather?) -> Void) {
-        let query = "?q=select%20location,%20wind.speed,%20astronomy,%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text='\(city)')%20and%20u='c'%20&format=json"
-        weatherUrl = URL(string: query, relativeTo: weatherUrl)
+    func getWeather(city: String, callback: @escaping (Bool, Weather?, Request?) -> Void) {
+        let originalString = "?q=select location, wind.speed, astronomy, item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='\(city)') and u='c' &format=json"
+        let query = originalString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        weatherUrl = URL(string: query!, relativeTo: weatherUrl)
         task?.cancel()
         task = session.dataTask(with: weatherUrl!, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    print(error!)
-                    callback(false, nil)
+                    callback(false, nil, Request.errorRequest)
                     return
                 }
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print(error!)
-                    callback(false, nil)
+                    callback(false, nil, Request.errorServer)
                     return
                 }
                 guard let weather = try? JSONDecoder().decode(Weather.self, from: data ) else {
-                    print("Error: Couldn't decode data")
-                    callback(false, nil)
+                    callback(false, nil, Request.errorData)
                     return
                 }
-                callback(true, weather)
+                callback(true, weather, Request.succeed)
             }
         })
         task?.resume()
     }
+    
+    
 }

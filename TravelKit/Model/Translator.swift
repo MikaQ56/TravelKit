@@ -22,14 +22,3 @@ struct Translator: Codable {
     }
 }
 
-/*struct TranslatedTextsList: Codable {
-    let data : Translations
-}
-
-struct Translations: Codable {
-    let translations : [TranslatedText]
-}
-
-struct TranslatedText: Codable {
-    let translatedText: String
-}*/

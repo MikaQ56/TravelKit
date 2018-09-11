@@ -1,0 +1,31 @@
+{
+    "query": {
+        "count": 1,
+        "created": "2018-09-11T12:02:34Z",
+        "lang": "en-US",
+        "results": {
+            "channel": {
+                "location": {
+                    "city": "Lorient",
+                    "country": "France",
+                    "region": " Brittany"
+                },
+                "wind": {
+                    "speed": "22.53"
+                },
+                "astronomy": {
+                    "sunrise": "7:46 am",
+                    "sunset": "8:33 pm"
+                },
+                "item": {
+                    "condition": {
+                        "code": "30",
+                        "date": "Tue, 11 Sep 2018 01:00 PM CEST",
+                        "temp": "20",
+                        "text": "Partly Cloudy"
+                    }
+                }
+            }
+        }
+    }
+}

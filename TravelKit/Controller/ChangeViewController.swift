@@ -28,41 +28,28 @@ class ChangeViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
    
     @IBAction func convert(_ sender: Any) {
-        if !Converter.set(amount: amountTextField.text) { amountAlert()}
+        if !Converter.save(amount: amountTextField.text) { alert(title: "Convertisseur", message: "Vous devez saisir un montant en chiffre !")}
         let currencyIndex = devisePickerView.selectedRow(inComponent: 0)
         Converter.setCurrencySymbol(index: currencyIndex)
-        Converter.convertFromEuro()
     }
 }
 
-// MARK: - Alerts
+// MARK: - Alert
 extension ChangeViewController {
     
-    private func amountAlert() {
-        let alert = UIAlertController(title: "Erreur", message: "Vous n'avez pas saisi un montant valide", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    private func requestAlert() {
-        let alertVC = UIAlertController(title: "Erreur", message: "Les taux de change ne sont pas actualisés", preferredStyle: .alert)
+    private func alert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
     
 }
 
-
-
 // MARK: - Keyboard
 extension ChangeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        let amount = textField.text
-        let result = Converter.set(amount: amount)
-        print(result)
         return true
     }
     
@@ -92,12 +79,13 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 extension ChangeViewController {
     
     private func updateRates() {
-        changeService.getRates { (success, rates) in
+        changeService.getRates { (success, rates, state) in
             guard success, let rates = rates else {
-                self.requestAlert()
+                self.alert(title: "Mise à jour des taux", message: state!.rawValue)
                 return
             }
-            Converter.set(rates: rates)
+            print(state!.rawValue)
+            Converter.save(rates: rates)
         }
     }
 }
