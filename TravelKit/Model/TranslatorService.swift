@@ -22,7 +22,7 @@ class TranslatorService {
     
     private let translatorUrl = URL(string: "https://translation.googleapis.com/language/translate/v2")!
     
-    private let key = "AIzaSyBgwqShF3Thl_B-0-P93uTE1RIMMjPsIwQ"
+    private let key = ""
     
     private var session = URLSession(configuration: .default)
     
