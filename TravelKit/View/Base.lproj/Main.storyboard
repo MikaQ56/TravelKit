@@ -679,6 +679,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Copperplate-Light" family="Copperplate" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" textContentType="address-level2"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Nc0-hX-Ujj" id="NGd-0T-FYz"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.69803921568627447" green="0.87450980392156863" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

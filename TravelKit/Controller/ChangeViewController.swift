@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Outlets & properties
 class ChangeViewController: UIViewController {
     
-    private let converter = Converter.shared
+    private let converterService = ConverterService.shared
     
     @IBOutlet weak var devisePickerView: UIPickerView!
     @IBOutlet weak var amountTextField: UITextField!
@@ -21,7 +21,7 @@ class ChangeViewController: UIViewController {
 extension ChangeViewController {
     
     override func viewWillAppear(_ animated: Bool) {
-        if !converter.saveRates() {
+        if !converterService.saveRates() {
             alert(title: "Avertissement", message: "Les taux de change n'ont pas pu être actualisés")
         }
     }
@@ -41,12 +41,12 @@ extension ChangeViewController {
             alert(title: "Erreur saisie", message: "Vous devez saisir un montant en chiffre !")
             return
         }
-        guard let symbol = try? converter.setCurrencySymbol(index: currencyIndex) else {
+        guard let symbol = try? converterService.getCurrencySymbol(index: currencyIndex) else {
             alert(title: "Erreur devise", message: "Le taux de change pour cette devise n'est pas disponible")
             return
         }
-        converter.amount = amount
-        converter.currencySymbol = symbol
+        converterService.amount = amount
+        converterService.currencySymbol = symbol
     }
     
     private func amountIsNumber() throws -> Double {
@@ -90,11 +90,11 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return converter.currencies!.count
+        return converterService.currencies!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var currenciesValues = Array(converter.currencies!.values)
+        var currenciesValues = Array(converterService.currencies!.values)
         return currenciesValues[row]
     }
 }

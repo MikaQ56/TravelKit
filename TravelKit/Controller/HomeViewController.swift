@@ -11,11 +11,11 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private let weatherService = WeatherService.shared
-    private let converter = Converter.shared
+    private let converterService = ConverterService.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !converter.saveCurrencies() {alert(title: "Avertissement", message: "Les devises n'ont pas pu être chargées. Seule la devise 'Dollar US' est disponible")}
+        if !converterService.saveCurrencies() {alert(title: "Avertissement", message: "Les devises n'ont pas pu être chargées. Seule la devise 'Dollar US' est disponible")}
         weatherService.saveWeatherHome(city: "lorient")
     }
     

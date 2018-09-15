@@ -10,16 +10,16 @@ import UIKit
 
 class ChangeResultViewController: UIViewController {
     
-    private let converter = Converter.shared
+    private let converterService = ConverterService.shared
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     
     override func viewWillAppear(_ animated: Bool) {
-        let result = converter.convertFromEuro()
+        let result = converterService.convertFromEuro()
         resultLabel.text = result
-        currencyLabel.text = converter.currencyPicked()
-        dateLabel.text = converter.getDate()
+        currencyLabel.text = converterService.currencyPicked()
+        dateLabel.text = converterService.getDate()
     } 
 }

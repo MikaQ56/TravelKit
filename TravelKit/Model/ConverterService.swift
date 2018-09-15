@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Converter {
+class ConverterService {
     
-    static let shared = Converter()
+    static let shared = ConverterService()
     private init(){}
     private var rate: Double?
     private var changeService = ChangeService.shared
@@ -42,7 +42,7 @@ class Converter {
         return true
     }
     
-    func setCurrencySymbol(index: Int) throws -> String {
+    func getCurrencySymbol(index: Int) throws -> String {
         let currencies = self.currencies!
         for (i, symbol) in currencies.keys.enumerated() {
             if i == index {

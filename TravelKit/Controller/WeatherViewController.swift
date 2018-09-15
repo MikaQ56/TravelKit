@@ -54,6 +54,7 @@ extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cityTextField.resignFirstResponder()
+        checkTextField()
         return true
     }
     
