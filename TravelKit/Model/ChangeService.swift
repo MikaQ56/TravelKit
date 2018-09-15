@@ -11,19 +11,13 @@ import Foundation
 class ChangeService {
     
     static let shared = ChangeService()
-    
     private init(){}
-    
     init(session: URLSession) {
         self.session = session
     }
-    
     private let ratesUrl = URL(string: "http://data.fixer.io/api/latest?access_key=69389a470e7df4f67b5e02e082b4e4bf")
-    
     private let currenciesUrl = URL(string: "http://data.fixer.io/api/symbols?access_key=69389a470e7df4f67b5e02e082b4e4bf")
-    
     private var session = URLSession(configuration: .default)
-    
     private var task: URLSessionDataTask?
     
     func getRates(callback: @escaping (Bool, Rates?, Request?) -> Void) {

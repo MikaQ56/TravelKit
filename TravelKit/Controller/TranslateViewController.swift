@@ -8,14 +8,17 @@
 
 import UIKit
 
+// MARK : - Properties & Outlets
 class TranslateViewController: UIViewController {
     
     private let translatorService = TranslatorService.shared
+    
     @IBOutlet weak var textTranslated: UILabel!
     @IBOutlet weak var textToTranslate: UITextView!
     @IBOutlet weak var languageButton: UIButton!
 }
 
+// MARK: - Controller's life cycle
 extension TranslateViewController {
     
     override func viewDidLoad() {
@@ -24,11 +27,12 @@ extension TranslateViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let target = translatorService.getTarget()
+        let target = translatorService.target
         languageButton.setImage(UIImage(named: target), for: UIControlState.normal)
     }
 }
 
+// MARK: - Actions
 extension TranslateViewController {
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -39,13 +43,17 @@ extension TranslateViewController {
         let text = textToTranslate.text!
         translatorService.translate(text: text) { (success, translator, state) in
             guard success, let translator = translator else {
-                self.alert(title: "Traducteur", message: state.rawValue)
+                print(state.rawValue)
+                self.alert(title: "Erreur traduction", message: "La traduction n'a pas pu être effectuée")
                 return
             }
-            print(translator.data.translations[0].translatedText)
             self.textTranslated.text = translator.data.translations[0].translatedText
         }
     }
+}
+
+// MARK: - Alert
+extension TranslateViewController {
     
     private func alert(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -53,4 +61,5 @@ extension TranslateViewController {
         present(alertVC, animated: true, completion: nil)
     }
 }
+
 

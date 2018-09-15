@@ -38,6 +38,8 @@
 		CA0866032147F3730037F784 /* TranslatorServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0866022147F3730037F784 /* TranslatorServiceTestCase.swift */; };
 		CA0866052147F7B90037F784 /* WeatherServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0866042147F7B90037F784 /* WeatherServiceTestCase.swift */; };
 		CA086607214802F60037F784 /* ConverterTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA086606214802F60037F784 /* ConverterTestCase.swift */; };
+		CA086657214BAEF70037F784 /* ToolBelt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA086656214BAEF70037F784 /* ToolBelt.swift */; };
+		CA086659214CF6CA0037F784 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA086658214CF6CA0037F784 /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		CA0866022147F3730037F784 /* TranslatorServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorServiceTestCase.swift; sourceTree = "<group>"; };
 		CA0866042147F7B90037F784 /* WeatherServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTestCase.swift; sourceTree = "<group>"; };
 		CA086606214802F60037F784 /* ConverterTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterTestCase.swift; sourceTree = "<group>"; };
+		CA086656214BAEF70037F784 /* ToolBelt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBelt.swift; sourceTree = "<group>"; };
+		CA086658214CF6CA0037F784 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 				CA0865E62143BFA20037F784 /* Weather.swift */,
 				CA0865EA21440CAF0037F784 /* Languages.swift */,
 				CA0865EC21468EE80037F784 /* Request.swift */,
+				CA086658214CF6CA0037F784 /* Errors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				CA0865AF213EA3570037F784 /* Assets.xcassets */,
 				CA0865A8213EA3560037F784 /* AppDelegate.swift */,
 				CA0865B4213EA3570037F784 /* Info.plist */,
+				CA086656214BAEF70037F784 /* ToolBelt.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -313,11 +319,13 @@
 				CA0865EB21440CAF0037F784 /* Languages.swift in Sources */,
 				CA0865DF21400E190037F784 /* WeatherService.swift in Sources */,
 				CA0865DB213FD0340037F784 /* ChangeResultViewController.swift in Sources */,
+				CA086657214BAEF70037F784 /* ToolBelt.swift in Sources */,
 				CA0865CD213EBCDD0037F784 /* ChangeViewController.swift in Sources */,
 				CA0865D3213EC08B0037F784 /* ChangeService.swift in Sources */,
 				CA0865E9214400760037F784 /* LanguageViewController.swift in Sources */,
 				CA0865D1213EBD5B0037F784 /* WeatherViewController.swift in Sources */,
 				CA0865E72143BFA20037F784 /* Weather.swift in Sources */,
+				CA086659214CF6CA0037F784 /* Errors.swift in Sources */,
 				CA0865E3214029A50037F784 /* Translator.swift in Sources */,
 				CA0865D7213EE3CC0037F784 /* Converter.swift in Sources */,
 				CA0865A9213EA3560037F784 /* AppDelegate.swift in Sources */,

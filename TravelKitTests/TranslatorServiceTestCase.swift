@@ -20,7 +20,7 @@ class TranslatorServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(translator)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
+            
             expectation.fulfill()
         }
         
@@ -36,7 +36,7 @@ class TranslatorServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(translator)
-            XCTAssertEqual(state, Alert.Request.errorServer)
+            
             expectation.fulfill()
         }
         
@@ -52,7 +52,7 @@ class TranslatorServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(translator)
-            XCTAssertEqual(state, Alert.Request.errorData)
+           
             expectation.fulfill()
         }
         
@@ -68,7 +68,7 @@ class TranslatorServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(translator)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
+            
             expectation.fulfill()
         }
         
@@ -84,7 +84,7 @@ class TranslatorServiceTestCase: XCTestCase {
             // Then
             XCTAssert(success)
             XCTAssertNotNil(translator)
-            XCTAssertEqual(state, Alert.Request.succeed)
+            
             expectation.fulfill()
         }
         

@@ -11,28 +11,14 @@ import Foundation
 class WeatherService {
     
     static let shared = WeatherService()
-    
     private init(){}
-    
     init(session: URLSession) {
         self.session = session
     }
-    
-    private var weatherHome: Weather?
-    
+    var weatherHome: Weather?
     private var weatherUrl = URL(string: "http://query.yahooapis.com/v1/public/yql")
-    
     private var session = URLSession(configuration: .default)
-    
     private var task: URLSessionDataTask?
-    
-    func set(weather: Weather) {
-        self.weatherHome = weather
-    }
-    
-    func getWeatherHome() -> Weather {
-        return weatherHome!
-    }
     
     func getWeather(city: String, callback: @escaping (Bool, Weather?, Request?) -> Void) {
         let originalString = "?q=select location, wind.speed, astronomy, item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='\(city)') and u='c' &format=json"
@@ -59,5 +45,13 @@ class WeatherService {
         task?.resume()
     }
     
-    
+    func saveWeatherHome(city: String) {
+        getWeather(city: city) { (success, weather, state) in
+            guard success, let weatherHome = weather else {
+                print(state!.rawValue)
+                return
+            }
+            self.weatherHome = weatherHome
+        }
+    }
 }

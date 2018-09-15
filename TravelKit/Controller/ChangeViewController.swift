@@ -8,29 +8,53 @@
 
 import UIKit
 
-// MARK: - Controller's life cycle
-extension ChangeViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateRates()
-    }
-}
-
 // MARK: - Outlets & properties
 class ChangeViewController: UIViewController {
-
-    private let converter = Converter()
     
-    private let changeService = ChangeService.shared
+    private let converter = Converter.shared
     
     @IBOutlet weak var devisePickerView: UIPickerView!
     @IBOutlet weak var amountTextField: UITextField!
-   
+}
+
+// MARK: - Controller's life cycle
+extension ChangeViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !converter.saveRates() {
+            alert(title: "Avertissement", message: "Les taux de change n'ont pas pu être actualisés")
+        }
+    }
+}
+
+// MARK: - Action
+extension ChangeViewController {
+    
     @IBAction func convert(_ sender: Any) {
-        if !Converter.save(amount: amountTextField.text) { alert(title: "Convertisseur", message: "Vous devez saisir un montant en chiffre !")}
+        updateConverter()
+        performSegue(withIdentifier: "segueToResult", sender: self)
+    }
+    
+    private func updateConverter() {
         let currencyIndex = devisePickerView.selectedRow(inComponent: 0)
-        Converter.setCurrencySymbol(index: currencyIndex)
+        guard let amount = try? amountIsNumber() else {
+            alert(title: "Erreur saisie", message: "Vous devez saisir un montant en chiffre !")
+            return
+        }
+        guard let symbol = try? converter.setCurrencySymbol(index: currencyIndex) else {
+            alert(title: "Erreur devise", message: "Le taux de change pour cette devise n'est pas disponible")
+            return
+        }
+        converter.amount = amount
+        converter.currencySymbol = symbol
+    }
+    
+    private func amountIsNumber() throws -> Double {
+        let amountString = amountTextField.text
+        guard let amount = Double(amountString!) else {
+            throw Errors.FormError.isNotNumber
+        }
+        return amount
     }
 }
 
@@ -66,26 +90,13 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Converter.getCurrencies().count
+        return converter.currencies!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var currenciesValues = Array(Converter.getCurrencies().values)
+        var currenciesValues = Array(converter.currencies!.values)
         return currenciesValues[row]
     }
 }
 
-// MARK: - Utilities
-extension ChangeViewController {
-    
-    private func updateRates() {
-        changeService.getRates { (success, rates, state) in
-            guard success, let rates = rates else {
-                self.alert(title: "Mise à jour des taux", message: state!.rawValue)
-                return
-            }
-            print(state!.rawValue)
-            Converter.save(rates: rates)
-        }
-    }
-}
+

@@ -10,7 +10,7 @@ import UIKit
 
 class LanguageViewController: UIViewController {
     
-    private var language: Languages?
+    private let translatorService = TranslatorService.shared
 
     @IBOutlet var languageButtons: [UIButton]!
     
@@ -18,12 +18,7 @@ class LanguageViewController: UIViewController {
         for languageButton in languageButtons {
             if sender == languageButton {
                 let tagButton = languageButton.tag
-                language = Languages(rawValue: tagButton)
-                guard let language = language else {
-                    return
-                }
-                let target = Language.getTarget(language: language)
-                TranslatorService.shared.set(target: target)
+                translatorService.setTarget(buttonTag: tagButton)
                 navigationController?.popViewController(animated: true)
             }
         }

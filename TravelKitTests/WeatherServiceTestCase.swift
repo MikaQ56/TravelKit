@@ -21,7 +21,6 @@ class WeatherServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(weather)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -37,7 +36,6 @@ class WeatherServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(weather)
-            XCTAssertEqual(state, Alert.Request.errorServer)
             expectation.fulfill()
         }
         
@@ -53,7 +51,6 @@ class WeatherServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(weather)
-            XCTAssertEqual(state, Alert.Request.errorData)
             expectation.fulfill()
         }
         
@@ -69,7 +66,6 @@ class WeatherServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(weather)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -85,7 +81,6 @@ class WeatherServiceTestCase: XCTestCase {
             // Then
             XCTAssert(success)
             XCTAssertNotNil(weather)
-            XCTAssertEqual(state, Alert.Request.succeed)
             expectation.fulfill()
         }
         

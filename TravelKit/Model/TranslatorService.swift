@@ -11,21 +11,14 @@ import Foundation
 class TranslatorService {
     
     static let shared = TranslatorService()
-    
-    private var target = "en"
-    
+    var target = "en"
     private init(){}
-    
     init(session: URLSession) {
         self.session = session
     }
-    
     private let translatorUrl = URL(string: "https://translation.googleapis.com/language/translate/v2")!
-    
-    private let key = ""
-    
+    private let key = "AIzaSyBgwqShF3Thl_B-0-P93uTE1RIMMjPsIwQ"
     private var session = URLSession(configuration: .default)
-    
     private var task: URLSessionDataTask?
     
     func translate(text: String, callback: @escaping (Bool, Translator?, Request) -> Void) {
@@ -60,11 +53,12 @@ class TranslatorService {
         return request
     }
     
-    func set(target: String) {
+    func setTarget(buttonTag: Int) {
+        let languageSelected = Languages(rawValue: buttonTag)
+        guard let language = languageSelected else {
+            return
+        }
+        let target = Language.getTarget(language: language)
         self.target = target
-    }
-    
-    func getTarget() -> String {
-        return target
     }
 }

@@ -20,7 +20,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(rates)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -36,7 +35,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(rates)
-            XCTAssertEqual(state!, Alert.Request.errorServer)
             expectation.fulfill()
         }
         
@@ -52,7 +50,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(rates)
-            XCTAssertEqual(state!, Alert.Request.errorData)
             expectation.fulfill()
         }
         
@@ -68,7 +65,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(rates)
-            XCTAssertEqual(state!, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -84,7 +80,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(success)
             XCTAssertNotNil(rates)
-            XCTAssertEqual(state!, Alert.Request.succeed)
             expectation.fulfill()
         }
         
@@ -100,7 +95,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(currencies)
-            XCTAssertEqual(state, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -116,7 +110,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(currencies)
-            XCTAssertEqual(state!, Alert.Request.errorServer)
             expectation.fulfill()
         }
         
@@ -132,7 +125,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(currencies)
-            XCTAssertEqual(state!, Alert.Request.errorData)
             expectation.fulfill()
         }
         
@@ -148,7 +140,6 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(!success)
             XCTAssertNil(currencies)
-            XCTAssertEqual(state!, Alert.Request.errorRequest)
             expectation.fulfill()
         }
         
@@ -164,7 +155,7 @@ class ChangeServiceTestCase: XCTestCase {
             // Then
             XCTAssert(success)
             XCTAssertNotNil(currencies)
-            XCTAssertEqual(state!, Alert.Request.succeed)
+           
             expectation.fulfill()
         }
         
