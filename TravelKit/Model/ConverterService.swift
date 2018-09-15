@@ -12,10 +12,16 @@ class ConverterService {
     
     static let shared = ConverterService()
     private init(){}
-    private var rate: Double?
+    init(symbols: [String], rates: Rates) {
+        self.symbols = symbols
+        self.rates = rates
+    }
+    var rate: Double?
     private var changeService = ChangeService.shared
-    var currencies: [String : String]?
-    var currencySymbol: String?
+    var currencies: [String]?
+    var symbols: [String]?
+    var currenciesList: [String : String]?
+    var symbol: String?
     var amount:Double?
     private var rates: Rates?
     
@@ -23,10 +29,12 @@ class ConverterService {
         changeService.getCurrencies { (success, currencies, state) in
             guard success, let currencies = currencies else {
                 print(state!.rawValue)
-                self.currencies = ["USD": "United States Dollar"]
+                self.currencies = ["United States Dollar"]
                 return
             }
-            self.currencies = currencies.currencies
+            self.currencies = [String](currencies.currencies.values)
+            self.symbols = [String](currencies.currencies.keys)
+            self.currenciesList = currencies.currencies
         }
         return true
     }
@@ -42,10 +50,10 @@ class ConverterService {
         return true
     }
     
-    func getCurrencySymbol(index: Int) throws -> String {
-        let currencies = self.currencies!
-        for (i, symbol) in currencies.keys.enumerated() {
+    func getSymbol(index: Int) throws -> String {
+        for (i, symbol) in symbols!.enumerated() {
             if i == index {
+                self.symbol = symbol
                 return symbol
             }
         }
@@ -53,8 +61,8 @@ class ConverterService {
     }
     
     func currencyPicked() -> String {
-        if let currencies = self.currencies {
-            let currency = currencies[currencySymbol!]!
+        if let currenciesList = self.currenciesList {
+            let currency = currenciesList[symbol!]!
             return currency
         }
         return String()
@@ -72,7 +80,7 @@ class ConverterService {
     
     func convertFromEuro() -> String {
         let rates = self.rates!.rates
-        rate = rates[currencySymbol!]
+        rate = rates[symbol!]
         let result = amount! * rate!
         return String(Int(result.rounded()))
     }

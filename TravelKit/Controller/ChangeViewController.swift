@@ -41,12 +41,12 @@ extension ChangeViewController {
             alert(title: "Erreur saisie", message: "Vous devez saisir un montant en chiffre !")
             return
         }
-        guard let symbol = try? converterService.getCurrencySymbol(index: currencyIndex) else {
+        guard let symbol = try? converterService.getSymbol(index: currencyIndex) else {
             alert(title: "Erreur devise", message: "Le taux de change pour cette devise n'est pas disponible")
             return
         }
         converterService.amount = amount
-        converterService.currencySymbol = symbol
+        converterService.symbol = symbol
     }
     
     private func amountIsNumber() throws -> Double {
@@ -94,8 +94,8 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var currenciesValues = Array(converterService.currencies!.values)
-        return currenciesValues[row]
+        var currencies = converterService.currencies!
+        return currencies[row]
     }
 }
 
