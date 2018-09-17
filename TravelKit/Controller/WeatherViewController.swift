@@ -34,6 +34,7 @@ class WeatherViewController: UIViewController {
 // MARK: - Life cycle's controller
 extension WeatherViewController {
     
+    // Weather data displayed on Weather view on 'viewDidLoad' event
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherHome = weatherService.weatherHome
@@ -41,6 +42,7 @@ extension WeatherViewController {
         weatherService.getWeather(city: "new-york") { (success, weather, state) in
             guard success, let weather = weather else {
                 print(state!.rawValue)
+                self.alert(title: "Avertissement", message: "La météo pour la ville de New York n'a pas pu être actualisée")
                 return
             }
             self.weatherAbroad = weather
@@ -67,6 +69,7 @@ extension WeatherViewController: UITextFieldDelegate {
 // MARK: - Utilities
 extension WeatherViewController {
     
+    // Check city name typed by user & get the city's weather with Weather Service
     private func checkTextField() {
         guard let city = cityTextField.text else {
             return
@@ -104,12 +107,6 @@ extension WeatherViewController {
         sunsetLabel.text = weatherHome.query.results.channel.astronomy.sunset
         windLabel.text = weatherHome.query.results.channel.wind.speed+" km/h"
         temperatureLabel.text = weatherHome.query.results.channel.item.condition.temp+"°"
-    }
-    
-    private func alert(title: String, message: String) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
     }
 }
 

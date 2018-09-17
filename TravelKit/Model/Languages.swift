@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Manage languages available in app
 enum Languages: Int {
     case deutch = 0, danish, norvegian, greek, english, spanish, finland, irish, iceland, italian, japan, netherland
 }

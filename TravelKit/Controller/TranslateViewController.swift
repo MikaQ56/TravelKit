@@ -21,11 +21,13 @@ class TranslateViewController: UIViewController {
 // MARK: - Controller's life cycle
 extension TranslateViewController {
     
+    // Default language for 'languageButton' is english
     override func viewDidLoad() {
         super.viewDidLoad()
         languageButton.setImage(UIImage(named: "en"), for: UIControlState.normal)
     }
     
+    // Language is updated & image's button too
     override func viewWillAppear(_ animated: Bool) {
         let target = translatorService.target
         languageButton.setImage(UIImage(named: target), for: UIControlState.normal)
@@ -39,6 +41,7 @@ extension TranslateViewController {
         textToTranslate.resignFirstResponder()
     }
     
+    // When 'translate' button is tapped then we use 'translate' method from Translator Service to get text translated
     @IBAction func translate(_ sender: Any) {
         let text = textToTranslate.text!
         translatorService.translate(text: text) { (success, translator, state) in
@@ -49,16 +52,6 @@ extension TranslateViewController {
             }
             self.textTranslated.text = translator.data.translations[0].translatedText
         }
-    }
-}
-
-// MARK: - Alert
-extension TranslateViewController {
-    
-    private func alert(title: String, message: String) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
     }
 }
 

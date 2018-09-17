@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Data struct for rates from fixer.io api. Protocol Codable used
 struct Rates: Codable {
     let timestamp: Int
     let date: String

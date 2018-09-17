@@ -10,12 +10,17 @@ import Foundation
 
 class ConverterService {
     
+    // Implement singleton pattern
     static let shared = ConverterService()
     private init(){}
+    
+    // init method for tests
     init(symbols: [String], rates: Rates) {
         self.symbols = symbols
         self.rates = rates
     }
+    
+    // Properties for service & shared with controllers
     var rate: Double?
     private var changeService = ChangeService.shared
     var currencies: [String]?
@@ -25,6 +30,7 @@ class ConverterService {
     var amount:Double?
     private var rates: Rates?
     
+    // Request currencies from fixer.io api & save data in Converter Service
     func saveCurrencies() -> Bool {
         changeService.getCurrencies { (success, currencies, state) in
             guard success, let currencies = currencies else {
@@ -39,6 +45,7 @@ class ConverterService {
         return true
     }
     
+    // Request rates from fixer.io api & save data in Converter Service
     func saveRates() -> Bool {
         changeService.getRates { (success, rates, state) in
             guard success, let rates = rates else {
@@ -50,6 +57,7 @@ class ConverterService {
         return true
     }
     
+    // Get symbol currency picked from 'Picker View'
     func getSymbol(index: Int) throws -> String {
         for (i, symbol) in symbols!.enumerated() {
             if i == index {
@@ -60,6 +68,7 @@ class ConverterService {
         throw Errors.CurrencyError.currencyIsNotAvailable
     }
     
+    // Get currency picked from 'Picker View'
     func currencyPicked() -> String {
         if let currenciesList = self.currenciesList {
             let currency = currenciesList[symbol!]!
@@ -68,6 +77,7 @@ class ConverterService {
         return String()
     }
     
+    // Get rates date & format
     func getDate() -> String {
         let timestamp = rates!.timestamp
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
@@ -78,6 +88,7 @@ class ConverterService {
         return dateFormatter.string(from: date)
     }
     
+    // Convert amount typed by user with currency selected
     func convertFromEuro() -> String {
         let rates = self.rates!.rates
         rate = rates[symbol!]

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Data struct for google translate api. 
 struct Translator: Codable {
     
     let data: Translations

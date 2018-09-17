@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Data struct for yahoo weather api
 struct Weather: Codable {
     
     let query: Query

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Data struct for currencies from fixer.io api. Protocol Codable used
 struct Currencies: Codable {
     let currencies: [String : String]
     

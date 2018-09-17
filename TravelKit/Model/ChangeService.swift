@@ -10,16 +10,22 @@ import Foundation
 
 class ChangeService {
     
+    // Implement singleton pattern
     static let shared = ChangeService()
     private init(){}
+    
+    // init method for tests
     init(session: URLSession) {
         self.session = session
     }
+    
+    // Properties for api request
     private let ratesUrl = URL(string: "http://data.fixer.io/api/latest?access_key=69389a470e7df4f67b5e02e082b4e4bf")
     private let currenciesUrl = URL(string: "http://data.fixer.io/api/symbols?access_key=69389a470e7df4f67b5e02e082b4e4bf")
     private var session = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
     
+    // Request for rates
     func getRates(callback: @escaping (Bool, Rates?, Request?) -> Void) {
         task?.cancel()
         task = session.dataTask(with: ratesUrl!) { (data, response, error) in
@@ -44,6 +50,7 @@ class ChangeService {
         task?.resume()
     }
     
+    // Request for currencies
     func getCurrencies(callback: @escaping (Bool, Currencies?, Request?) -> Void) {
         task?.cancel()
         task = session.dataTask(with: currenciesUrl!) { (data, response, error) in

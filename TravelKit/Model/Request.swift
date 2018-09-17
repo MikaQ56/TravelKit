@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// Manage request's state
 enum Request: String {
     case succeed = "Opération réussie"
     case errorRequest = "Il y a une erreur dans la requête"

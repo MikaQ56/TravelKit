@@ -14,6 +14,7 @@ class LanguageViewController: UIViewController {
 
     @IBOutlet var languageButtons: [UIButton]!
     
+    // Update language target when language button tapped & back to rootViewController 'TranslateView'
     @IBAction func tappedLanguageButton(_ sender: UIButton) {
         for languageButton in languageButtons {
             if sender == languageButton {

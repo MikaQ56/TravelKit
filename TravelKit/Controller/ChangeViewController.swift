@@ -30,25 +30,30 @@ extension ChangeViewController {
 // MARK: - Action
 extension ChangeViewController {
     
+    // When 'convert' button tapped, go to 'changeResult' view 'updateConverter' method returns true
     @IBAction func convert(_ sender: Any) {
-        updateConverter()
-        performSegue(withIdentifier: "segueToResult", sender: self)
+        if updateConverter() {
+            performSegue(withIdentifier: "segueToResult", sender: self)
+        }
     }
     
-    private func updateConverter() {
+    // 'updateConverter' method updates 'amount' & 'symbol' properties after checked values. If ok, returns true
+    private func updateConverter() -> Bool {
         let currencyIndex = devisePickerView.selectedRow(inComponent: 0)
         guard let amount = try? amountIsNumber() else {
             alert(title: "Erreur saisie", message: "Vous devez saisir un montant en chiffre !")
-            return
+            return false
         }
         guard let symbol = try? converterService.getSymbol(index: currencyIndex) else {
             alert(title: "Erreur devise", message: "Le taux de change pour cette devise n'est pas disponible")
-            return
+            return false
         }
         converterService.amount = amount
         converterService.symbol = symbol
+        return true
     }
     
+    // Check amount typed is a number
     private func amountIsNumber() throws -> Double {
         let amountString = amountTextField.text
         guard let amount = Double(amountString!) else {
@@ -56,17 +61,6 @@ extension ChangeViewController {
         }
         return amount
     }
-}
-
-// MARK: - Alert
-extension ChangeViewController {
-    
-    private func alert(title: String, message: String) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
-    }
-    
 }
 
 // MARK: - Keyboard

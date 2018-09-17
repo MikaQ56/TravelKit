@@ -39,8 +39,10 @@ class ConverterTestCase: XCTestCase {
         // Given
         converterService.amount = 100
         converterService.symbol = "USD"
-        let result = converterService.convertFromEuro()
         let sample = (100*1.158943).rounded()
+        // When
+        let result = converterService.convertFromEuro()
+        // Then
         XCTAssertEqual(result, String(Int(sample)))
     }
 }

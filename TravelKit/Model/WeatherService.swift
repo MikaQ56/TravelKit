@@ -10,16 +10,22 @@ import Foundation
 
 class WeatherService {
     
+    // Implement singleton pattern
     static let shared = WeatherService()
     private init(){}
+    
+    // init method for tests
     init(session: URLSession) {
         self.session = session
     }
+    
+    // Properties for request
     var weatherHome: Weather?
     private var weatherUrl = URL(string: "http://query.yahooapis.com/v1/public/yql")
     private var session = URLSession(configuration: .default)
     private var task: URLSessionDataTask?
     
+    // Get weather data for city
     func getWeather(city: String, callback: @escaping (Bool, Weather?, Request?) -> Void) {
         let originalString = "?q=select location, wind.speed, astronomy, item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='\(city)') and u='c' &format=json"
         let query = originalString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
@@ -45,7 +51,8 @@ class WeatherService {
         task?.resume()
     }
     
-    func saveWeatherHome(city: String) {
+    // Save home weather in the weather service
+    func saveWeatherHome(city: String) -> Bool {
         getWeather(city: city) { (success, weather, state) in
             guard success, let weatherHome = weather else {
                 print(state!.rawValue)
@@ -53,5 +60,6 @@ class WeatherService {
             }
             self.weatherHome = weatherHome
         }
+        return true
     }
 }

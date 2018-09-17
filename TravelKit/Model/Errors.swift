@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Manage errors
 class Errors{
     
     enum FormError : Error {
